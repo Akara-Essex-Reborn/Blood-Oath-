@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<accounts count="1">
+	<account>
+		<username>Chrisangel18</username>
+		<newCryptPassword>3D-7B-4B-3A-F0-EA-6A-57-35-E9-33-B9-F2-C0-B5-E2-18-29-BF-E7</newCryptPassword>
+		<accessLevel>Owner</accessLevel>
+		<created>2023-11-29T08:26:11.1132681Z</created>
+		<lastLogin>2023-12-29T06:00:22.5508101Z</lastLogin>
+		<totalGameTime>PT13H29M58.8221744S</totalGameTime>
+		<chars>
+			<char index="0">93</char>
+		</chars>
+		<totalCurrency>0.0020042529999999992</totalCurrency>
+		<sovereigns>0</sovereigns>
+	</account>
+</accounts>

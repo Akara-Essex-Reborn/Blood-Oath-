@@ -1,0 +1,118 @@
+﻿//PowerScroll Exchange!!
+//By: DxMonkey - AKA - Tresdni
+//Ultima Eclipse - www.ultimaeclipse.com
+using System;
+using Server.Items;
+using Server.Gumps;
+using System.Collections.Generic;
+
+namespace Server.Items
+{
+	public class EvoDustExchange : Item
+	{
+		public static int i_DustReward = 0;
+
+		[Constructable]
+		public EvoDustExchange() : base(0xE77)
+		{
+			Movable = false;
+			Hue = 1153;
+			Name = "The Evolution Dust Exchange (Double-Click For Menu)";
+
+		}
+
+		public override void OnDoubleClick(Mobile from)
+		{
+
+			if (!from.HasGump(typeof(EvoCreditsGump)))
+			{
+				from.SendGump(new EvoCreditsGump());
+			}
+			else
+				from.SendMessage("You already have this menu open!");
+		}
+
+		public override bool OnDragDrop(Mobile from, Item dropped)
+		{
+				if (dropped is EvolutionDust)
+				{
+					if (dropped is DragonsDust)
+					{
+						i_DustReward = 3 * dropped.Amount;
+					}
+					else if (dropped is TreesDust)
+					{
+						i_DustReward = 2 * dropped.Amount;
+					}
+					else
+					{
+						i_DustReward = dropped.Amount;
+					}
+				}
+				else
+				{
+					if (dropped is DragonDust)
+					{
+						i_DustReward = 3 * dropped.Amount;
+				}
+					else if (dropped is TreeDust)
+					{
+						i_DustReward = 2 * dropped.Amount;
+				}
+					else if (dropped is EvilMageDust)
+					{
+						i_DustReward = dropped.Amount;
+					}
+					else if (dropped is HiryuDust)
+					{
+						i_DustReward = dropped.Amount;
+					}
+					/*else if (dropped is HorseDust)
+					{
+						i_DustReward = dropped.Amount;
+					}*/
+					else if (dropped is SwampDragonDust)
+					{
+						i_DustReward = dropped.Amount;
+					}
+					else if (dropped is DaemonDust)
+					{
+						i_DustReward = dropped.Amount;
+					}
+					else if (dropped is TigerDust)
+					{
+						i_DustReward = dropped.Amount;
+					}				
+			}
+			dropped.Delete();
+
+			if (i_DustReward > 0)
+			{
+				from.AddToBackpack(new EvolutionDust(i_DustReward));
+				from.SendMessage(1173, "You were rewarded {0} Evolution Dust for trade.", i_DustReward);
+			}
+
+			else if (i_DustReward == 0) from.SendMessage(1173, "This was not Evolution dust, but it was deleted anyways.");
+
+			return true;
+		}
+
+		public EvoDustExchange(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+}
